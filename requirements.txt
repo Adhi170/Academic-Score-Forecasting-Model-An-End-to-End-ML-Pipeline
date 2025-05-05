@@ -5,4 +5,5 @@ matplotlib
 seaborn
 scipy
 dill
+xgboost
 #-e .
