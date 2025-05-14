@@ -1,9 +1,8 @@
 import os 
 import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent))  
-from logger import logging
-from exception import CustomException
+
+from src.logger import logging
+from src.exception import CustomException
 from dataclasses import dataclass
 import pandas as pd
 import numpy as np
@@ -12,7 +11,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
-from utils import save_object
+from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:

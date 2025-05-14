@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Performance Indicator</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Exam Performance Indicator</h1>
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender" required>
+                    <option value="" disabled {% if not request.form.get('gender') %}selected{% endif %}>Select your Gender</option>
+                    <option value="male" {% if request.form.get('gender') == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if request.form.get('gender') == 'female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ethnicity">Race or Ethnicity</label>
+                <select name="ethnicity" id="ethnicity" required>
+                    <option value="" disabled {% if not request.form.get('ethnicity') %}selected{% endif %}>Select Ethnicity</option>
+                    <option value="group A" {% if request.form.get('ethnicity') == 'group A' %}selected{% endif %}>Group A</option>
+                    <option value="group B" {% if request.form.get('ethnicity') == 'group B' %}selected{% endif %}>Group B</option>
+                    <option value="group C" {% if request.form.get('ethnicity') == 'group C' %}selected{% endif %}>Group C</option>
+                    <option value="group D" {% if request.form.get('ethnicity') == 'group D' %}selected{% endif %}>Group D</option>
+                    <option value="group E" {% if request.form.get('ethnicity') == 'group E' %}selected{% endif %}>Group E</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="parental_level_of_education">Parental Level of Education</label>
+                <select name="parental_level_of_education" id="parental_level_of_education" required>
+                    <option value="" disabled {% if not request.form.get('parental_level_of_education') %}selected{% endif %}>Select Parent Education</option>
+                    <option value="associate's degree" {% if request.form.get('parental_level_of_education') == "associate's degree" %}selected{% endif %}>Associate's Degree</option>
+                    <option value="bachelor's degree" {% if request.form.get('parental_level_of_education') == "bachelor's degree" %}selected{% endif %}>Bachelor's Degree</option>
+                    <option value="high school" {% if request.form.get('parental_level_of_education') == "high school" %}selected{% endif %}>High School</option>
+                    <option value="master's degree" {% if request.form.get('parental_level_of_education') == "master's degree" %}selected{% endif %}>Master's Degree</option>
+                    <option value="some college" {% if request.form.get('parental_level_of_education') == "some college" %}selected{% endif %}>Some College</option>
+                    <option value="some high school" {% if request.form.get('parental_level_of_education') == "some high school" %}selected{% endif %}>Some High School</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="lunch">Lunch Type</label>
+                <select name="lunch" id="lunch" required>
+                    <option value="" disabled {% if not request.form.get('lunch') %}selected{% endif %}>Select Lunch Type</option>
+                    <option value="free/reduced" {% if request.form.get('lunch') == 'free/reduced' %}selected{% endif %}>Free/Reduced</option>
+                    <option value="standard" {% if request.form.get('lunch') == 'standard' %}selected{% endif %}>Standard</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="test_preparation_course">Test Preparation Course</label>
+                <select name="test_preparation_course" id="test_preparation_course" required>
+                    <option value="" disabled {% if not request.form.get('test_preparation_course') %}selected{% endif %}>Select Test Course</option>
+                    <option value="none" {% if request.form.get('test_preparation_course') == 'none' %}selected{% endif %}>None</option>
+                    <option value="completed" {% if request.form.get('test_preparation_course') == 'completed' %}selected{% endif %}>Completed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="reading_score">Reading Score (out of 100)</label>
+                <input type="number" name="reading_score" id="reading_score" min="0" max="100" required
+                       value="{{ request.form.get('reading_score', '') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="writing_score">Writing Score (out of 100)</label>
+                <input type="number" name="writing_score" id="writing_score" min="0" max="100" required
+                       value="{{ request.form.get('writing_score', '') }}">
+            </div>
+
+            <button type="submit">Predict Math Score</button>
+            <a href="{{ url_for('predict_datapoint') }}">
+                <button type="button" class="reset-btn">Reset </button>
+            </a>
+        </form>
+
+        {% if results %}
+            <div class="result">
+                <h2>Prediction Result</h2>
+                <p>Your predicted Math score is: <strong>{{ results }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
