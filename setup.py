@@ -15,7 +15,7 @@ def get_requirements(file_path:str)-> List[str]:
     return requirements
 
 setup(
-    name='mlproject',
+    name='Academic Score Forecasting Model: An End-to-End ML Pipeline',
     version='0.0.1',
     author='Adhavan',
     author_email='adhiadhavan074@gmail.com',
